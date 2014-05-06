@@ -2,7 +2,7 @@
 
 #include <boost/lexical_cast.hpp>
 #include <QPointF>
-#include <sfrp/util.hpp>
+#include <sfrp/eventmap.hpp>
 
 namespace sani {
 
@@ -28,5 +28,5 @@ static std::string combine(const int& mouseButton, const QPointF& mousePos) {
 // Used only for compilation testing
 static sfrp::Behavior<boost::optional<std::string>> mousePressPositions(
     const sani::UserInput& userInput) {
-  return sfrp::pmEvLift(combine, userInput.mousePress, userInput.mousePos);
+  return sfrp::EventMap()(combine, userInput.mousePress, userInput.mousePos);
 }

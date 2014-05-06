@@ -10,7 +10,7 @@
 #include <sani/animation.hpp>
 #include <sani/drawing.hpp>
 #include <sani/userinput.hpp>
-#include <sfrp/util.hpp>  // sfrp::pmTriggerInfStep
+#include <sfrp/triggerutil.hpp>
 #include <iostream>
 #include <memory>
 
@@ -77,21 +77,21 @@ void InteractiveAnimationView::setInteractiveAnimation(
 
   const QPoint curMousePos = mapFromGlobal(QCursor::pos());
   std::tie(userInput.mousePos, m_impl->m_updateMousePos) =
-      sfrp::pmTriggerInfStep(rect().contains(curMousePos)
-                                 ? mapToScene(curMousePos)
-                                 : QPointF(0.0, 0.0));
+      sfrp::TriggerUtil::triggerInfStep(rect().contains(curMousePos)
+                                            ? mapToScene(curMousePos)
+                                            : QPointF(0.0, 0.0));
 
   std::tie(userInput.mousePress, m_impl->m_notifyMousePress) =
-      sfrp::pmTriggerInf<int>();
+      sfrp::TriggerUtil::triggerInf<int>();
 
   std::tie(userInput.mouseRelease, m_impl->m_notifyMouseRelease) =
-      sfrp::pmTriggerInf<int>();
+      sfrp::TriggerUtil::triggerInf<int>();
 
   std::tie(userInput.keyRelease, m_impl->m_notifyKeyRelease) =
-      sfrp::pmTriggerInf<int>();
+      sfrp::TriggerUtil::triggerInf<int>();
 
   std::tie(userInput.keyPress, m_impl->m_notifyKeyPress) =
-      sfrp::pmTriggerInf<int>();
+      sfrp::TriggerUtil::triggerInf<int>();
 
   m_impl->m_opAnimation = interactiveAnimation(userInput);
   m_impl->m_animationStartTime.restart();
