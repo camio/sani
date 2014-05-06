@@ -1,4 +1,4 @@
-NAME=slanggui
+NAME=sani
 include( ../smake/lib.pri )
 
 ## Dependencies
